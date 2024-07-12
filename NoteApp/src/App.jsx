@@ -11,7 +11,7 @@ function App() {
       ?
       <div className='main landing'>
         <h1 className='landing--title'>You have no notes yet</h1>
-        <button className='landing--button'>Create Note</button>
+        <button className='landing--button'>Create one Note</button>
       </div>
       :
       <div>
