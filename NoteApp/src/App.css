@@ -31,13 +31,86 @@
     border: 1px ridge var(--color--chocolate);
     border-radius: 25px;
 
-    /* background-color: var(--color--milk); */
-    background-image: linear-gradient(360deg, rgb(255,255,255), rgb(255, 243, 210));
+    background-color: var(--color--chocolate);
+    /* background-image: linear-gradient(360deg, rgb(255,255,255), rgb(255, 243, 210)); */
 
     font-family: "Playwrite CU", cursive;
     font-optical-sizing: auto;
     font-size: 15px;
     font-weight: 700;
-    color: var(--color--chocolate);
+    color: var(--color--milk);
 
+}
+
+.main--notebook {
+    color: aliceblue;
+}
+
+.split {
+    display: flex;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    height: 100dvh;
+    background-color: var(--color--cookie);
+}
+
+.sidebar--header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 30px;
+}
+
+.header--title {
+    margin: 0;
+
+    font-family: "Playwrite CU", cursive;
+    font-optical-sizing: auto;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--color--chocolate);
+}
+
+.header--button {
+    padding: 6px 10px;
+
+    border: 1px solid var(--color--chocolate);
+    border-radius: 5px;
+
+    background-color: var(--color--chocolate);
+
+    font-optical-sizing: auto;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color--milk);
+}
+.sidebar--notecard {
+    margin: 0;
+    width: 100%;
+    padding: 10px;
+
+    background-color: var(--color--chocolate);
+
+    font-family: "Playwrite CU", cursive;
+    font-optical-sizing: auto;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.light{
+    color: var(--color--milk);
+    /* background-color: var(--color--cookie); */
+    background-image: linear-gradient(180deg, var(--color--cookie), rgb(255, 174, 53));
+}
+.dark {
+    color: var(--color--milk);
+    background-color: var(--color--chocolate);
 }
