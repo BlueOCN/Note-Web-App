@@ -1,42 +1,43 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.main {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+
+    /* background-color: var(--color--cookie); */
+    background-image: linear-gradient(180deg, var(--color--cookie), rgb(252, 168, 42));
+
+    padding: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.landing--title {
+    margin-bottom: 8px;
+
+    font-family: "Playwrite CU", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-size: 50px;
+    text-align: center;
+    color: white;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.landing--button {
+    padding: 5px 16px;
+    cursor: pointer;
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+    border: 1px ridge var(--color--chocolate);
+    border-radius: 25px;
 
-.card {
-  padding: 2em;
-}
+    /* background-color: var(--color--milk); */
+    background-image: linear-gradient(360deg, rgb(255,255,255), rgb(255, 243, 210));
 
-.read-the-docs {
-  color: #888;
+    font-family: "Playwrite CU", cursive;
+    font-optical-sizing: auto;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color--chocolate);
+
 }
