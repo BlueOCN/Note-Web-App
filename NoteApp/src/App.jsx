@@ -1,6 +1,7 @@
 import Split from 'react-split'
 import { useState } from 'react'
 import Sidebar from './components/Sidebar'
+import Editor from './components/Editor'
 import './App.css'
 
 function App() {
@@ -35,8 +36,10 @@ function App() {
         direction="horizontal"
         className='split'
       >
-        <Sidebar />
-        <h1>Editor</h1>
+        <Sidebar 
+          notes={notes}
+        />
+        <Editor />
       </Split>
       }
     </main>

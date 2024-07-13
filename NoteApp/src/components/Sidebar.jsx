@@ -1,6 +1,11 @@
 
+function Sidebar(props) {
 
-function Sidebar() {
+    const asd = props.notes.map(note => {
+        <h1 className="sidebar--notecard light">note.body</h1>
+    })
+    console.log(asd)
+
     return (
         
         <div className="sidebar">
