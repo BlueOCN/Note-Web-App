@@ -60,13 +60,16 @@
 }
 
 .sidebar--header {
-    position: relative;
+    /* position: relative; */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 40px;
     padding: 30px;
+
+    flex-wrap: wrap;
+    row-gap: 10px;
 }
 
 .header--title {
@@ -124,9 +127,8 @@
     height: 100vh;
 }
 
-
 .gutter {
-    background-color: #eee;
+    background-color: var(--color--chocolate);
     background-repeat: no-repeat;
     background-position: 50%;
 }
