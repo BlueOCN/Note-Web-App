@@ -99,16 +99,33 @@
     color: var(--color--milk);
 }
 .sidebar--notecard {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
     margin: 0;
-    width: 100%;
-    padding: 10px;
 
-    background-color: var(--color--chocolate);
+    width: 100%;
+    padding: 5px 10px;
+
+    cursor: pointer;
+}
+
+.notecard--title {
+    margin: 0;
+    margin-right: auto;
 
     font-family: "Playwrite CU", cursive;
     font-optical-sizing: auto;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
+}
+
+.notecard--button{
+    cursor: pointer;
+    color: var(--color--chocolate);
+    background: transparent;
+    border: transparent;
 }
 
 .light{

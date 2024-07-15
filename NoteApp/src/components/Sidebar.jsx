@@ -1,22 +1,52 @@
+import PropTypes from 'prop-types'
 
 function Sidebar(props) {
 
-    const asd = props.notes.map(note => {
-        <h1 className="sidebar--notecard light">note.body</h1>
-    })
-    console.log(asd)
+    // eslint-disable-next-line react/prop-types
+    const noteElements = props.notes.map((note) => (
+        <div 
+            className={`sidebar--notecard 
+                ${note.id === props.currentNoteId 
+                ? "dark" : "light"}`}
+            key={note.id}
+            onClick={() => props.setCurrentNoteId(note.id)}
+        >
+            <h1 className="notecard--title">{note.body}</h1>
+            <button className="notecard--button">
+                <span 
+                    className={`material-symbols-outlined 
+                        ${note.id === props.currentNoteId 
+                        ? "dark" : "light"}`}
+                    >delete
+                </span>
+            </button>
+        </div>
+    ))
 
     return (
         
         <div className="sidebar">
             <div className="sidebar--header">
                 <h1 className="header--title">Notes</h1>
-                <button className="header--button">+</button>
+                <button 
+                    className="header--button"
+                    onClick={props.newNote}
+                    >+
+                </button>
             </div>
-            <h1 className="sidebar--notecard light"> # Note 1</h1>
-            <h1 className="sidebar--notecard dark"># Note 2</h1>
+            {noteElements}
         </div>
     )
+}
+
+Sidebar.propTypes = {
+    notes: PropTypes.shape({
+        id: PropTypes.string,
+        body: PropTypes.string
+        }),
+    newNote: PropTypes.func,
+    currentNoteId: PropTypes.string,
+    setCurrentNoteId: PropTypes.func
 }
 
 export default Sidebar;
