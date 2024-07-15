@@ -16,7 +16,7 @@ function Editor() {
     const [selectedTab, setSelectedTab] = useState("write");
     
     return (
-        <div className="container">
+        <div className="pane">
             <ReactMde
                 value={value}
                 onChange={setValue}
@@ -25,6 +25,8 @@ function Editor() {
                 generateMarkdownPreview={markdown =>
                 Promise.resolve(converter.makeHtml(markdown))
                 }
+                minEditorHeight={80}
+                heightUnits="vh"
             />
         </div>
     )
