@@ -43,7 +43,7 @@ Sidebar.propTypes = {
     notes: PropTypes.shape({
         id: PropTypes.string,
         body: PropTypes.string
-        }),
+    }),
     newNote: PropTypes.func,
     currentNoteId: PropTypes.string,
     setCurrentNoteId: PropTypes.func

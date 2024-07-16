@@ -98,6 +98,7 @@
     font-weight: 500;
     color: var(--color--milk);
 }
+
 .sidebar--notecard {
     display: flex;
     flex-direction: row;
@@ -106,7 +107,7 @@
     margin: 0;
 
     width: 100%;
-    padding: 5px 10px;
+    padding: 8px 10px;
 
     cursor: pointer;
 }
@@ -121,11 +122,20 @@
     font-weight: 600;
 }
 
-.notecard--button{
-    cursor: pointer;
+.notecard--button {
+    /* cursor: pointer;
     color: var(--color--chocolate);
     background: transparent;
-    border: transparent;
+    border: transparent; */
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar--notecard:hover > .notecard--button {
+    display: block;
+    padding: 5px
 }
 
 .light{

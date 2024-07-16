@@ -11,15 +11,18 @@ const converter = new Showdown.Converter({
   });
 
 
-function Editor() {
-    const [value, setValue] = useState("**Hello world!!!**");
+function Editor(props) {
+    // const [value, setValue] = useState("**Hello world!!!**");
     const [selectedTab, setSelectedTab] = useState("write");
+
+    const currentNote = props.notes.find((note) => note.id === props.currentNoteId) || props.notes[0]
+    // console.log(currentNote)
     
     return (
         <div className="pane">
             <ReactMde
-                value={value}
-                onChange={setValue}
+                value={currentNote.body}
+                onChange={props.updateNote}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
                 generateMarkdownPreview={markdown =>

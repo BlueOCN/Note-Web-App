@@ -8,7 +8,7 @@ import './App.css'
 function App() {
 
   const [notes, setNotes] = useState([])
-  const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id)
+  const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id || "")
   // console.log(notes)
 
   function createNote() {
@@ -17,7 +17,17 @@ function App() {
       body: "# New Note"
     };
     setCurrentNoteId(newNote.id)
-    return setNotes(notes => [newNote, ...notes])
+    setNotes(notes => [newNote, ...notes])
+  }
+
+  function updateNote(text) {
+
+    setNotes(prevNotes => prevNotes.map(note => {
+      if(note.id === currentNoteId){
+        console.log(note, {body: text})
+      }
+    }))
+    // console.log("Update Note")
   }
 
   return (
@@ -44,7 +54,11 @@ function App() {
           currentNoteId={currentNoteId}
           setCurrentNoteId={setCurrentNoteId}
         />
-        <Editor />
+        <Editor 
+          notes={notes}
+          currentNoteId={currentNoteId}
+          updateNote={updateNote}
+        />
       </Split>
       }
     </main>
