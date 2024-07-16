@@ -21,13 +21,16 @@ function App() {
   }
 
   function updateNote(text) {
-
     setNotes(prevNotes => prevNotes.map(note => {
-      if(note.id === currentNoteId){
-        console.log(note, {body: text})
-      }
+      return note.id === currentNoteId
+            ? {...note, body: text}
+            : note
     }))
-    // console.log("Update Note")
+  }
+
+  function deleteNote(event, noteId){
+    event.stopPropagation()
+    setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
   }
 
   return (
@@ -53,6 +56,7 @@ function App() {
           newNote={createNote}
           currentNoteId={currentNoteId}
           setCurrentNoteId={setCurrentNoteId}
+          deleteNote={deleteNote}
         />
         <Editor 
           notes={notes}

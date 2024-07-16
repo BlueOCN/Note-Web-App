@@ -11,8 +11,11 @@ function Sidebar(props) {
             key={note.id}
             onClick={() => props.setCurrentNoteId(note.id)}
         >
-            <h1 className="notecard--title">{note.body}</h1>
-            <button className="notecard--button">
+            <h1 className="notecard--title">{note.body.split("\n")[0]}</h1>
+            <button 
+                className="notecard--button"
+                onClick={() => props.deleteNote(event, note.id)}
+            >
                 <span 
                     className={`material-symbols-outlined 
                         ${note.id === props.currentNoteId 
@@ -46,7 +49,8 @@ Sidebar.propTypes = {
     }),
     newNote: PropTypes.func,
     currentNoteId: PropTypes.string,
-    setCurrentNoteId: PropTypes.func
+    setCurrentNoteId: PropTypes.func,
+    deleteNote: PropTypes.func
 }
 
 export default Sidebar;
