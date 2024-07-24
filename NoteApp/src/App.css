@@ -93,7 +93,7 @@
 .header--button {
     padding: 6px 10px;
 
-    border: 1px solid var(--color--chocolate);
+    border: 1px transparent;
     border-radius: 5px;
 
     background-color: var(--color--chocolate);
@@ -103,6 +103,12 @@
     font-size: 15px;
     font-weight: 500;
     color: var(--color--milk);
+}
+
+.header--button:hover{
+    border: 1px transparent;
+    color: var(--color--chocolate);
+    background-color: var(--color--milk);
 }
 
 .sidebar--notecard {
@@ -164,6 +170,7 @@
 }
 
 .pane {
+
     overflow-y: auto;
     width: 80%;
     height: 100vh;
@@ -181,6 +188,10 @@
 
 .gutter.gutter-horizontal:hover {
     cursor: col-resize;
+}
+
+.react-mde {
+    border: 0;
 }
 
 .mde-header {
