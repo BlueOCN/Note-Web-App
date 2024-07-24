@@ -28,7 +28,7 @@
     padding: 5px 16px;
     cursor: pointer;
 
-    border: 1px ridge var(--color--chocolate);
+    border: 1px transparent;
     border-radius: 25px;
 
     background-color: var(--color--chocolate);
@@ -40,6 +40,12 @@
     font-weight: 700;
     color: var(--color--milk);
 
+}
+
+.landing--button:hover {
+    border: 1px transparent;
+    color: var(--color--chocolate);
+    background-color: var(--color--milk);
 }
 
 .main--notebook {
