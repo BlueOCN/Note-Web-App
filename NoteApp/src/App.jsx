@@ -21,16 +21,26 @@ function App() {
   }
 
   function updateNote(text) {
-    setNotes(prevNotes => prevNotes.map(note => {
-      return note.id === currentNoteId
-            ? {...note, body: text}
-            : note
-    }))
+    setNotes(prevNotes => {
+
+      const updatedNotes = prevNotes.map(note => {
+        return note.id === currentNoteId
+              ? {...note, body: text}
+              : note
+      })
+      const focusedNote = updatedNotes.filter(note => note.id === currentNoteId)
+      const otherNotes = updatedNotes.filter(note => note.id !== currentNoteId)
+      return focusedNote.concat(otherNotes)
+    })
   }
 
   function deleteNote(event, noteId){
     event.stopPropagation()
     setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+  }
+
+  function findCurrentNote() {
+    return notes.find(note => note.id === currentNoteId) || notes[0]
   }
 
   return (
@@ -54,7 +64,7 @@ function App() {
         <Sidebar 
           notes={notes}
           newNote={createNote}
-          currentNoteId={currentNoteId}
+          currentNoteId={findCurrentNote().id}
           setCurrentNoteId={setCurrentNoteId}
           deleteNote={deleteNote}
         />

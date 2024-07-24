@@ -20,7 +20,7 @@ function Editor(props) {
     const currentNote = props.notes.find((note) => note.id === props.currentNoteId) || props.notes[0]
         
     return (
-        <div className="pane">
+        <section className="pane">
             <ReactMde
                 value={currentNote.body}
                 onChange={props.updateNote}
@@ -29,20 +29,31 @@ function Editor(props) {
                 generateMarkdownPreview={markdown =>
                 Promise.resolve(converter.makeHtml(markdown))
                 }
-                minEditorHeight={80}
+                minEditorHeight={100}
                 heightUnits="vh"
             />
-        </div>
+        </section>
     )
 }
 
-Editor.propTypes = {
+/* Editor.propTypes = {
     notes: PropTypes.shape({
         id: PropTypes.string,
         body: PropTypes.string
     }),
     currentNoteId: PropTypes.string,
     updateNote: PropTypes.func
-}
+} */
+
+Editor.propTypes = {
+    notes: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            body: PropTypes.string
+        })
+    ),
+    currentNoteId: PropTypes.string,
+    updateNote: PropTypes.func
+};
 
 export default Editor
