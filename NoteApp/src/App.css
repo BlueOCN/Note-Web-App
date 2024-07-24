@@ -180,3 +180,47 @@
 .mde-header {
     background-color: var(--color--cookie);
 }
+
+.mde-tabs > button{
+    font-family: "Playwrite CU", cursive;
+    font-optical-sizing: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color--chocolate);
+}
+
+.mde-tabs > button:hover{
+    border: 1px hidden;
+    border-radius: 5px;
+    color: var(--color--milk);
+    background-color: var(--color--chocolate);
+}
+
+.mde-header .mde-tabs button.selected {
+    border: 1px transparent; 
+    border-radius: 5px;
+    color: var(--color--milk);
+    background-color: var(--color--chocolate);
+}
+
+.mde-header-item > button > svg{
+    color: var(--color--chocolate);
+}
+
+.mde-text {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-optical-sizing: auto;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color--chocolate);
+    background-color: antiquewhite;
+}
+
+.mde-preview{
+    font-family: "Playwrite CU", cursive;
+    font-optical-sizing: auto;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color--milk);
+    background-color: var(--color--chocolate);
+}

@@ -29,7 +29,7 @@ function Editor(props) {
                 generateMarkdownPreview={markdown =>
                 Promise.resolve(converter.makeHtml(markdown))
                 }
-                minEditorHeight={100}
+                minEditorHeight={40}
                 heightUnits="vh"
             />
         </section>
