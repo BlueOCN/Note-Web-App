@@ -74,7 +74,7 @@ function App() {
         notes.length > 0 &&
           <Editor 
             notes={notes}
-            currentNoteId={currentNoteId}
+            currentNote={currentNote}
             updateNote={updateNote}
           />
         }

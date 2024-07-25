@@ -13,16 +13,13 @@ const converter = new Showdown.Converter({
 
 
 function Editor(props) {
-    // const [value, setValue] = useState("**Hello world!!!**");
+
     const [selectedTab, setSelectedTab] = useState("write");
 
-    // eslint-disable-next-line react/prop-types
-    const currentNote = props.notes.find((note) => note.id === props.currentNoteId) || props.notes[0]
-        
     return (
         <section className="pane">
             <ReactMde
-                value={currentNote.body}
+                value={props.currentNote.body}
                 onChange={props.updateNote}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
@@ -36,15 +33,6 @@ function Editor(props) {
     )
 }
 
-/* Editor.propTypes = {
-    notes: PropTypes.shape({
-        id: PropTypes.string,
-        body: PropTypes.string
-    }),
-    currentNoteId: PropTypes.string,
-    updateNote: PropTypes.func
-} */
-
 Editor.propTypes = {
     notes: PropTypes.arrayOf(
         PropTypes.shape({
@@ -52,7 +40,7 @@ Editor.propTypes = {
             body: PropTypes.string
         })
     ),
-    currentNoteId: PropTypes.string,
+    currentNote: PropTypes.string,
     updateNote: PropTypes.func
 };
 
