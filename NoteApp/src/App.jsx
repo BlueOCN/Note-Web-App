@@ -2,10 +2,11 @@ import Split from 'react-split'
 import { useEffect, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import Editor from './components/Editor'
-import './App.css'
 
 import { addDoc, onSnapshot, doc, deleteDoc, setDoc} from 'firebase/firestore'
 import { notesCollection, db} from './firebase'
+
+import './App.css'
 
 function App() {
 
@@ -13,9 +14,7 @@ function App() {
   const [currentNoteId, setCurrentNoteId] = useState("")
 
   const currentNote = notes.find((note) => note.id === currentNoteId) || notes[0]
-
   const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
-  console.log(sortedNotes)
 
   useEffect(() =>{
     const unsubscribe = onSnapshot(notesCollection, (snapshot) => {
