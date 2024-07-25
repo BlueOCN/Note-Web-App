@@ -19,7 +19,7 @@ function Editor(props) {
     return (
         <section className="pane">
             <ReactMde
-                value={props.currentNote.body}
+                value={props.currentNote?.body}
                 onChange={props.updateNote}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}

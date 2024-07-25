@@ -1,19 +1,21 @@
 import Split from 'react-split'
 import { useEffect, useState } from 'react'
-import { nanoid } from 'nanoid'
 import Sidebar from './components/Sidebar'
 import Editor from './components/Editor'
 import './App.css'
 
-import { addDoc, onSnapshot, doc, deleteDoc} from 'firebase/firestore'
+import { addDoc, onSnapshot, doc, deleteDoc, setDoc} from 'firebase/firestore'
 import { notesCollection, db} from './firebase'
 
 function App() {
 
   const [notes, setNotes] = useState([])
-  const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id || "")
+  const [currentNoteId, setCurrentNoteId] = useState("")
 
   const currentNote = notes.find((note) => note.id === currentNoteId) || notes[0]
+
+  const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
+  console.log(sortedNotes)
 
   useEffect(() =>{
     const unsubscribe = onSnapshot(notesCollection, (snapshot) => {
@@ -27,26 +29,25 @@ function App() {
     return unsubscribe
   }, [])
 
+  useEffect(() => {
+    if (!currentNoteId) {
+      setCurrentNoteId(notes[0]?.id)
+    }
+  }, [notes])
+
   async function createNote() {
     const newNote = {
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
       body: "# New Note"
     };
     const newNoteRef = await addDoc(notesCollection, newNote)
     setCurrentNoteId(newNoteRef.id)
   }
 
-  function updateNote(text) {
-    setNotes(prevNotes => {
-
-      const updatedNotes = prevNotes.map(note => {
-        return note.id === currentNoteId
-              ? {...note, body: text}
-              : note
-      })
-      const focusedNote = updatedNotes.filter(note => note.id === currentNoteId)
-      const otherNotes = updatedNotes.filter(note => note.id !== currentNoteId)
-      return focusedNote.concat(otherNotes)
-    })
+  async function updateNote(text) {
+    const docRef = doc(db, "notes", currentNoteId)
+    await setDoc(docRef, { updatedAt: Date.now(), body: text }, { merge: true })
   }
 
   async function deleteNote(noteId){
@@ -73,21 +74,17 @@ function App() {
         className='split'
       >
         <Sidebar 
-          notes={notes}
+          notes={sortedNotes}
           newNote={createNote}
           currentNoteId={currentNote.id}
           setCurrentNoteId={setCurrentNoteId}
           deleteNote={deleteNote}
         />
-        { 
-        currentNoteId &&
-        notes.length > 0 &&
-          <Editor 
-            notes={notes}
-            currentNote={currentNote}
-            updateNote={updateNote}
-          />
-        }
+        <Editor 
+          notes={notes}
+          currentNote={currentNote}
+          updateNote={updateNote}
+        />
       </Split>
       }
     </main>
