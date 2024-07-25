@@ -14,7 +14,7 @@ function Sidebar(props) {
             <h1 className="notecard--title">{note.body.split("\n")[0]}</h1>
             <button 
                 className="notecard--button"
-                onClick={() => props.deleteNote(event, note.id)}
+                onClick={() => props.deleteNote(note.id)}
             >
                 <span 
                     className={`material-symbols-outlined 

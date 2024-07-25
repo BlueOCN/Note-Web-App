@@ -5,24 +5,34 @@ import Sidebar from './components/Sidebar'
 import Editor from './components/Editor'
 import './App.css'
 
+import { addDoc, onSnapshot, doc, deleteDoc} from 'firebase/firestore'
+import { notesCollection, db} from './firebase'
+
 function App() {
 
-  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes")) || [])
+  const [notes, setNotes] = useState([])
   const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id || "")
 
   const currentNote = notes.find((note) => note.id === currentNoteId) || notes[0]
 
   useEffect(() =>{
-    localStorage.setItem("notes", JSON.stringify(notes))
-  }, [notes])
+    const unsubscribe = onSnapshot(notesCollection, (snapshot) => {
+      // Sync up local notes
+      const notesArray = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }))
+      setNotes(notesArray)
+    })
+    return unsubscribe
+  }, [])
 
-  function createNote() {
+  async function createNote() {
     const newNote = {
-      id: nanoid(),
       body: "# New Note"
     };
-    setNotes(notes => [newNote, ...notes])
-    setCurrentNoteId(newNote.id)
+    const newNoteRef = await addDoc(notesCollection, newNote)
+    setCurrentNoteId(newNoteRef.id)
   }
 
   function updateNote(text) {
@@ -39,9 +49,9 @@ function App() {
     })
   }
 
-  function deleteNote(event, noteId){
-    event.stopPropagation()
-    setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+  async function deleteNote(noteId){
+    const docRef = doc(db, "notes", noteId)
+    await deleteDoc(docRef)
   }
 
   return (
