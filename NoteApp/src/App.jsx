@@ -7,12 +7,10 @@ import './App.css'
 
 function App() {
 
-  // localStorage.setItem("notes",[])
-  console.log(JSON.parse(localStorage.getItem("notes")))
-
   const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes")) || [])
-  const [currentNoteId, setCurrentNoteId] = useState(notes[0] && notes[0].id || "")
-  // console.log(notes)
+  const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id || "")
+
+  const currentNote = notes.find((note) => note.id === currentNoteId) || notes[0]
 
   useEffect(() =>{
     localStorage.setItem("notes", JSON.stringify(notes))
@@ -46,10 +44,6 @@ function App() {
     setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
   }
 
-  function findCurrentNote() {
-    return notes.find(note => note.id === currentNoteId) || notes[0]
-  }
-
   return (
     <main>
       {notes.length <= 0
@@ -59,7 +53,7 @@ function App() {
         <button 
           className='landing--button'
           onClick={createNote}
-        >Create one Note
+        >Create one Now
         </button>
       </div>
       :
@@ -71,7 +65,7 @@ function App() {
         <Sidebar 
           notes={notes}
           newNote={createNote}
-          currentNoteId={findCurrentNote().id}
+          currentNoteId={currentNote.id}
           setCurrentNoteId={setCurrentNoteId}
           deleteNote={deleteNote}
         />
