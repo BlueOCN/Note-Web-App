@@ -1,5 +1,5 @@
 import Split from 'react-split'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import Sidebar from './components/Sidebar'
 import Editor from './components/Editor'
@@ -7,17 +7,24 @@ import './App.css'
 
 function App() {
 
-  const [notes, setNotes] = useState([])
-  const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id || "")
+  // localStorage.setItem("notes",[])
+  console.log(JSON.parse(localStorage.getItem("notes")))
+
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes")) || [])
+  const [currentNoteId, setCurrentNoteId] = useState(notes[0] && notes[0].id || "")
   // console.log(notes)
+
+  useEffect(() =>{
+    localStorage.setItem("notes", JSON.stringify(notes))
+  }, [notes])
 
   function createNote() {
     const newNote = {
       id: nanoid(),
       body: "# New Note"
     };
-    setCurrentNoteId(newNote.id)
     setNotes(notes => [newNote, ...notes])
+    setCurrentNoteId(newNote.id)
   }
 
   function updateNote(text) {
@@ -68,11 +75,15 @@ function App() {
           setCurrentNoteId={setCurrentNoteId}
           deleteNote={deleteNote}
         />
-        <Editor 
-          notes={notes}
-          currentNoteId={currentNoteId}
-          updateNote={updateNote}
-        />
+        { 
+        currentNoteId &&
+        notes.length > 0 &&
+          <Editor 
+            notes={notes}
+            currentNoteId={currentNoteId}
+            updateNote={updateNote}
+          />
+        }
       </Split>
       }
     </main>
