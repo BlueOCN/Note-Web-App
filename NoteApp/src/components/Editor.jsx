@@ -19,8 +19,8 @@ function Editor(props) {
     return (
         <section className="pane">
             <ReactMde
-                value={props.currentNote?.body}
-                onChange={props.updateNote}
+                value={props.tempNoteText}
+                onChange={props.setTempNoteText}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
                 generateMarkdownPreview={markdown =>
@@ -34,14 +34,8 @@ function Editor(props) {
 }
 
 Editor.propTypes = {
-    notes: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string,
-            body: PropTypes.string
-        })
-    ),
-    currentNote: PropTypes.string,
-    updateNote: PropTypes.func
+    tempNoteText: PropTypes.string,
+    setTempNoteText: PropTypes.func
 };
 
 export default Editor

@@ -12,9 +12,25 @@ function App() {
 
   const [notes, setNotes] = useState([])
   const [currentNoteId, setCurrentNoteId] = useState("")
+  const [tempNoteText, setTempNoteText] = useState("")
 
   const currentNote = notes.find((note) => note.id === currentNoteId) || notes[0]
   const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
+
+  useEffect(() => {
+    if (currentNote) {
+      setTempNoteText(currentNote.body)
+    }
+  }, [currentNote])
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (currentNote.body !== tempNoteText) {
+        updateNote(tempNoteText) 
+      }
+    }, 500)
+    return () => clearTimeout(timeoutId)
+  }, [tempNoteText])
 
   useEffect(() =>{
     const unsubscribe = onSnapshot(notesCollection, (snapshot) => {
@@ -79,10 +95,9 @@ function App() {
           setCurrentNoteId={setCurrentNoteId}
           deleteNote={deleteNote}
         />
-        <Editor 
-          notes={notes}
-          currentNote={currentNote}
-          updateNote={updateNote}
+        <Editor
+          tempNoteText={tempNoteText}
+          setTempNoteText={setTempNoteText}
         />
       </Split>
       }
